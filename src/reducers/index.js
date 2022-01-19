@@ -2,13 +2,16 @@ import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION } from './../actions';
 
 export const initialState = {
     total: 100,
-    operation: "*",
+    operation: "+",
     memory: 100
 }
 
 const calculateResult = (num1, num2, operation) => {
+
+    console.log(num1, num2, operation)
     switch(operation) {
         case("+"):
+        console.log(num1 + num2)
             return num1 + num2;
         case("*"):
             return num1 * num2;
@@ -18,6 +21,8 @@ const calculateResult = (num1, num2, operation) => {
 }
 
 const reducer = (state, action) => {
+
+    console.log(action);
     switch(action.type) {
         case(ADD_ONE):
             return({
@@ -28,7 +33,7 @@ const reducer = (state, action) => {
         case(APPLY_NUMBER):
             return ({ 
                 ...state, 
-                total: calculateResult(state.total, action.payload, state.operation)
+                total: calculateResult(state.total, parseInt(action.payload), state.operation)
             });
         
         case(CHANGE_OPERATION):
