@@ -3,7 +3,7 @@ import reducer, { initialState } from '../reducers/';
 import './App.css';
 
 
-import { applyNumber, changeOperation, clearDisplay, memPlus } from '../actions'; 
+import { applyNumber, changeOperation, clearDisplay, memPlus, memZero, memValue } from '../actions'; 
 
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
@@ -33,8 +33,18 @@ function App() {
   }
 
   const memPlusButton = () => {
+    console.log(state.total)
+    dispatch(memPlus(state.total));
+  }
 
-    dispatch(memPlus(state.memory));
+  const memCButton = () => {
+    
+    dispatch(memZero());
+  }
+
+  const memRButton = () => {
+    
+    dispatch(memValue(state.memory));
   }
  
   return (
@@ -55,8 +65,8 @@ function App() {
             
             <div className="row">
               <CalcButton onClick={memPlusButton} value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton onClick={memRButton} value={"MR"}/>
+              <CalcButton onClick={memCButton} value={"MC"}/>
             </div>
 
             <div className="row">
