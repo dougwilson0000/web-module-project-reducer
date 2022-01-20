@@ -3,7 +3,7 @@ import reducer, { initialState } from '../reducers/';
 import './App.css';
 
 
-import { applyNumber } from '../actions'; 
+import { applyNumber, changeOperation, clearDisplay, memPlus } from '../actions'; 
 
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
@@ -18,6 +18,23 @@ function App() {
     console.log(number.target.value)
     dispatch(applyNumber(number.target.value));
     
+  }
+
+  const opClick = (op) => {
+    console.log(op.target.value)
+    dispatch(changeOperation(op.target.value));
+    
+  }
+
+  const clearClick = () => {
+    
+    dispatch(clearDisplay());
+    
+  }
+
+  const memPlusButton = () => {
+
+    dispatch(memPlus(state.memory));
   }
  
   return (
@@ -37,7 +54,7 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
+              <CalcButton onClick={memPlusButton} value={"M+"}/>
               <CalcButton value={"MR"}/>
               <CalcButton value={"MC"}/>
             </div>
@@ -61,13 +78,13 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton onClick={opClick} value={"+"}/>
+              <CalcButton onClick={opClick} value={"*"}/>
+              <CalcButton onClick={opClick} value={"-"}/>
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton onClick={clearClick} value={"CE"}/>
             </div>
 
           </form>
